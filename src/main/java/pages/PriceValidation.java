@@ -27,7 +27,7 @@ public class PriceValidation extends BaseClass{
 	@FindBy(xpath = "(//div[.='₹69,999'])[1]")
 	public WebElement HomePrice;
 	
-	@FindBy(xpath = "(//div[@class='css-g5y9jx'])[248]")
+	@FindBy(xpath = "(//div[@class='css-g5y9jx'])[242]")
 	public WebElement AddCart;
 	
 	@FindBy(xpath = "//a[@class='SXucWY']")
@@ -41,13 +41,15 @@ public class PriceValidation extends BaseClass{
 		return CloseButton;
 	}
 	
-	 public String getHomePrice() {
-		 return gettext(HomePrice);
-		 }
+	
+	
+	  //public String getHomePrice() { return gettext(HomePrice); }
+	  
+	 // public String getCartPrice() { return gettext(CartPrice); }
 	 
-	 public String getCartPrice() {
-		 return gettext(CartPrice); 
-		 }
+	 
+	 
+	 //
 	 
 	
 	

@@ -40,7 +40,7 @@ public class StepDefinition extends BaseClass{
 		//impWait(20);
 		click(ref.Samsung);
 		gettext(ref.HomePrice);
-		homeprice=ref.getHomePrice().replace("₹", "").replace(",", "").trim();
+		homeprice=gettext(ref.HomePrice).replace("₹", "").replace(",", "").trim();
 		System.out.println("home page price = " + homeprice);
 	    
 	}
@@ -48,15 +48,15 @@ public class StepDefinition extends BaseClass{
 	public void userAddTheProductToAddtocart() {
 		impWait(20);
 		windows(2);
-		explicitWaitClickable(ref.AddCart);
-		click(ref.AddCart);
-	   
+		explicitWaitClickable(ref.AddCart).click();
+		//click(ref.AddCart);
+		
 	}
 	@When("User clicks the cart button")
 	public void userClicksTheCartButton() {
-	    click(ref.CartBtn);
+	    safeclick(ref.CartBtn);
 	    gettext(ref.CartPrice);
-	    cartprice=ref.getCartPrice().replace("₹", "").replace(",", "").trim();
+	    cartprice=gettext(ref.CartPrice).replace("₹", "").replace(",", "").trim();
 		System.out.println("cart page price = " + cartprice);
 	}
 	
