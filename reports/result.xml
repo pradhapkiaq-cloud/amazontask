@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="12.285" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="User validates the product ratings" name="user successfully validates the product ratings" time="11.973">
+<system-out><![CDATA[
+Given User launch the Application...........................................passed
+When user search the smart watch............................................passed
+And user cliks the watch....................................................passed
+And user convert the ratings into numeric...................................passed
+Then the watch rating above 4.0 print name and ratings......................passed
+]]></system-out>
+</testcase>
+</testsuite>

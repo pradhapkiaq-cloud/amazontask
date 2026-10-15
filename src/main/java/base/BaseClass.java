@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -18,7 +19,10 @@ import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import junit.framework.Assert;
 
 public class BaseClass {
 	public static WebDriver driver;
@@ -82,7 +86,7 @@ public class BaseClass {
 	 
 	 public static WebElement explicitWaitVisible(By locator) {
 	        return new WebDriverWait(driver, Duration.ofSeconds(10))
-	       .until(ExpectedConditions.refreshed(ExpectedConditions.visibilityOfElementLocated(locator)));
+	       .until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
 	    }
 	 
 	 //webdriverwait click
@@ -114,8 +118,9 @@ public class BaseClass {
 		 return driver.getWindowHandles();	 
 		 
 	 }
-public static void switchWindow(String windowID ) {
-	driver.switchTo().window(windowID);
+public static void switchParentWindow(String parentwindow ) {
+	driver.switchTo().window(parentwindow);
+	
 	
 }
     public static void windows(int windownumber) {
@@ -131,20 +136,29 @@ public static void switchWindow(String windowID ) {
 	count++;	
 }
 }
-    public static void totalwindows(int windows) {
+    public static void switchtochildwindow(int windows) {
     	new WebDriverWait(driver, Duration.ofSeconds(10))
         .until(ExpectedConditions.numberOfWindowsToBe(windows));
+    	String parentwindow=driver.getWindowHandle();
     	Set<String> handles=driver.getWindowHandles();
-    	List<String> allwindow=new ArrayList<>(handles);
-    	if(windows<allwindow.size()) {
-    		
     	
-    	driver.switchTo().window(allwindow.get(windows));
+    	for (String window : handles) {
+    		if(!window.equals(parentwindow))
+			
+		{
+   
+    	driver.switchTo().window(window);
+    	break;
+		}
     	}
 	}
     
     public static void newTab() {
     	driver.switchTo().newWindow(WindowType.TAB);
+    }
+    
+    public static void back() {
+    	driver.navigate().back();
     }
     //gettext
   public static String gettext(WebElement locator) {
@@ -160,6 +174,13 @@ public static void switchWindow(String windowID ) {
 	 ((JavascriptExecutor) driver)
      .executeScript("arguments[0].scrollIntoView(true);", element);
  }
+ 
+ public static void jsClick(WebElement element) {
+	 ((JavascriptExecutor) driver)
+     .executeScript("arguments[0].scrollIntoView(true);", element);
+	 ((JavascriptExecutor) driver)
+     .executeScript("arguments[0].click;", element);
+ }
   //Collections
  
  public static List<String>
@@ -167,4 +188,27 @@ public static void switchWindow(String windowID ) {
  
  public static List<Double>
     productprice=new ArrayList<>();
+ 
+ public static List<Integer>
+ productprices=new ArrayList<>();
+ 
+ 
+ //dropdown
+ 
+ public static void selectByIndex(WebElement element, int index) {
+     new Select(element).selectByIndex(index);
+ }
+
+ public static void selectByValue(WebElement element, String value) {
+     new Select(element).selectByValue(value);
+ }
+
+ public static void selectByVisibleText(WebElement element, String text) {
+     new Select(element).selectByVisibleText(text);
+ }
+ public static void assertion(WebElement element,String expected) {
+	 Assert.assertEquals(element.getText(), expected);
+ }
 }
+
+

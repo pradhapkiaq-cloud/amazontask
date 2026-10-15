@@ -10,7 +10,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		
-		features={"features/comparison.feature"},
+		features={"features/cart.feature"},
 		//dryRun =true,
 		glue="steps",
 		snippets=CucumberOptions.SnippetType.CAMELCASE,
